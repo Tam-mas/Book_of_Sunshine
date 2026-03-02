@@ -47,12 +47,14 @@ interface SpellStore {
   starredSpells: string[];
   customSpells: Spell[];
   spellSlots: Record<number, boolean[]>;
+  characterLevel: number;
   toggleStar: (spellId: string) => void;
   addCustomSpell: (spell: Spell) => void;
   removeCustomSpell: (spellId: string) => void;
-  importData: (data: { starredSpells: string[], customSpells: Spell[], spellSlots?: Record<number, boolean[]> }) => void;
+  importData: (data: { starredSpells: string[], customSpells: Spell[], spellSlots?: Record<number, boolean[]>, characterLevel?: number }) => void;
   toggleSpellSlot: (level: number, index: number) => void;
   resetSpellSlots: () => void;
+  setCharacterLevel: (level: number) => void;
 }
 
 const initialSpellSlots: Record<number, boolean[]> = {
@@ -73,6 +75,7 @@ export const useSpellStore = create<SpellStore>()(
       starredSpells: [],
       customSpells: [],
       spellSlots: initialSpellSlots,
+      characterLevel: 20,
       toggleStar: (spellId) =>
         set((state) => {
           const isStarred = state.starredSpells.includes(spellId);
@@ -96,6 +99,7 @@ export const useSpellStore = create<SpellStore>()(
           starredSpells: data.starredSpells || [],
           customSpells: data.customSpells || [],
           spellSlots: data.spellSlots || initialSpellSlots,
+          characterLevel: data.characterLevel || 20,
         })),
       toggleSpellSlot: (level, index) =>
         set((state) => {
@@ -107,6 +111,10 @@ export const useSpellStore = create<SpellStore>()(
       resetSpellSlots: () =>
         set(() => ({
           spellSlots: initialSpellSlots,
+        })),
+      setCharacterLevel: (level) =>
+        set(() => ({
+          characterLevel: level,
         })),
     }),
     {
