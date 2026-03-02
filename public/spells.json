@@ -1,0 +1,141 @@
+[
+    {
+        "name": "Acid Splash",
+        "level": 0,
+        "school": "Evocation",
+        "time": "1 Action",
+        "range": "60 feet",
+        "components": "V, S",
+        "duration": "Instantaneous",
+        "concentration": false,
+        "classes": [
+            "Sorcerer",
+            "Wizard",
+            "Artificer"
+        ],
+        "description": "You hurl a bubble of acid. Choose one creature within range, or choose two creatures within range that are within 5 feet of each other. A target must succeed on a Dexterity saving throw or take 1d6 acid damage."
+    },
+    {
+        "name": "Guidance",
+        "level": 0,
+        "school": "Divination",
+        "time": "1 Action",
+        "range": "Touch",
+        "components": "V, S",
+        "duration": "Concentration, up to 1 minute",
+        "concentration": true,
+        "classes": [
+            "Cleric",
+            "Druid",
+            "Artificer"
+        ],
+        "description": "You touch one willing creature. Once before the spell ends, the target can roll a d4 and add the number rolled to one ability check of its choice."
+    },
+    {
+        "name": "Sorcerous Burst",
+        "level": 0,
+        "school": "Evocation",
+        "time": "1 Action",
+        "range": "120 feet",
+        "components": "V, S",
+        "duration": "Instantaneous",
+        "concentration": false,
+        "classes": [
+            "Sorcerer"
+        ],
+        "description": "You cast a bolt of sorcerous energy at one creature or object within range. Make a ranged spell attack. On a hit, the target takes 1d8 damage of a type you choose: Acid, Cold, Fire, Force, Lightning, Poison, Psychic, or Thunder. If you roll an 8 on a damage die, you can roll an additional d8 and add it to the damage."
+    },
+    {
+        "name": "Starry Wisp",
+        "level": 0,
+        "school": "Evocation",
+        "time": "1 Action",
+        "range": "60 feet",
+        "components": "V, S",
+        "duration": "Instantaneous",
+        "concentration": false,
+        "classes": [
+            "Bard",
+            "Druid"
+        ],
+        "description": "You launch a mote of starlight at a creature within range. Make a ranged spell attack. On a hit, the target takes 1d8 Radiant damage, and until the end of your next turn, it emits Dim Light in a 10-foot radius and can't benefit from the Invisible condition."
+    },
+    {
+        "name": "Shield",
+        "level": 1,
+        "school": "Abjuration",
+        "time": "1 Reaction",
+        "range": "Self",
+        "components": "V, S",
+        "duration": "1 round",
+        "concentration": false,
+        "classes": [
+            "Sorcerer",
+            "Wizard"
+        ],
+        "description": "An invisible barrier of magical force appears and protects you. Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack, and you take no damage from magic missile."
+    },
+    {
+        "name": "Cure Wounds",
+        "level": 1,
+        "school": "Abjuration",
+        "time": "1 Action",
+        "range": "Touch",
+        "components": "V, S",
+        "duration": "Instantaneous",
+        "concentration": false,
+        "classes": [
+            "Bard",
+            "Cleric",
+            "Druid",
+            "Paladin",
+            "Ranger"
+        ],
+        "description": "A creature you touch regains a number of Hit Points equal to 2d8 + your spellcasting ability modifier."
+    },
+    {
+        "name": "Healing Word",
+        "level": 1,
+        "school": "Abjuration",
+        "time": "1 Bonus Action",
+        "range": "60 feet",
+        "components": "V",
+        "duration": "Instantaneous",
+        "concentration": false,
+        "classes": [
+            "Bard",
+            "Cleric",
+            "Druid"
+        ],
+        "description": "A creature of your choice that you can see within range regains hit points equal to 2d4 + your spellcasting ability modifier."
+    },
+    {
+        "name": "Fireball",
+        "level": 3,
+        "school": "Evocation",
+        "time": "1 Action",
+        "range": "150 feet",
+        "components": "V, S, M",
+        "duration": "Instantaneous",
+        "concentration": false,
+        "classes": [
+            "Sorcerer",
+            "Wizard"
+        ],
+        "description": "A bright streak flashes from your pointing finger to a point you choose within range and then blossoms with a low roar into an explosion of flame. Each creature in a 20-foot-radius sphere centered on that point must make a Dexterity saving throw. A target takes 8d6 fire damage on a failed save, or half as much damage on a successful one."
+    },
+    {
+        "name": "Spirit Guardians",
+        "level": 3,
+        "school": "Conjuration",
+        "time": "1 Action",
+        "range": "Self (15-foot radius)",
+        "components": "V, S, M",
+        "duration": "Concentration, up to 10 minutes",
+        "concentration": true,
+        "classes": [
+            "Cleric"
+        ],
+        "description": "You call forth spirits to protect you. They flit around you to a distance of 15 feet for the duration. When a creature enters the area for the first time on a turn or starts its turn there, it must make a Wisdom saving throw. On a failed save, the creature takes 3d8 Radiant or Necrotic damage (your choice)."
+    }
+]
