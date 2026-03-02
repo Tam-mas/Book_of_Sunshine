@@ -27,10 +27,14 @@ const FULL_CASTER_SLOTS: Record<number, number[]> = {
 };
 
 export default function SpellSlotTracker() {
-    const { spellSlots, toggleSpellSlot, resetSpellSlots, characterLevel, setCharacterLevel } = useSpellStore();
+    const { profiles, activeProfileId, toggleSpellSlot, resetSpellSlots, setCharacterLevel } = useSpellStore();
+
+    const activeProfile = profiles[activeProfileId];
 
     // Use a client hydration check to ensure the server mismatch does not happen
-    if (!spellSlots) return null;
+    if (!activeProfile || !activeProfile.spellSlots) return null;
+
+    const { spellSlots, characterLevel } = activeProfile;
 
     return (
         <div className="bg-neutral-800/80 p-5 rounded-xl border border-neutral-700/50 shadow-lg mb-8">

@@ -1,11 +1,17 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { useSpellStore, Spell } from '@/store/useSpellStore';
 import { PlusCircle, Search } from 'lucide-react';
 
 export default function AddSpellPage() {
-    const { addCustomSpell } = useSpellStore();
+    const { addCustomSpell, _migrateLegacyData } = useSpellStore();
+    const router = useRouter();
+
+    useEffect(() => {
+        _migrateLegacyData();
+    }, [_migrateLegacyData]);
     const [success, setSuccess] = useState(false);
 
     const [formData, setFormData] = useState({

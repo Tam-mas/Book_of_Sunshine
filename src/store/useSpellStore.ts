@@ -43,18 +43,36 @@ export function normalizeSpell(s: any): Spell {
   };
 }
 
-interface SpellStore {
+export interface Profile {
+  id: string;
+  name: string;
   starredSpells: string[];
   customSpells: Spell[];
   spellSlots: Record<number, boolean[]>;
   characterLevel: number;
+}
+
+interface SpellStore {
+  // Global Profile State
+  profiles: Record<string, Profile>;
+  activeProfileId: string;
+
+  // Profile Management Actions
+  createProfile: (name: string) => void;
+  switchProfile: (id: string) => void;
+  deleteProfile: (id: string) => void;
+
+  // Active Profile Actions
   toggleStar: (spellId: string) => void;
   addCustomSpell: (spell: Spell) => void;
   removeCustomSpell: (spellId: string) => void;
-  importData: (data: { starredSpells: string[], customSpells: Spell[], spellSlots?: Record<number, boolean[]>, characterLevel?: number }) => void;
+  importData: (data: { profiles?: Record<string, Profile>, activeProfileId?: string }) => void;
   toggleSpellSlot: (level: number, index: number) => void;
   resetSpellSlots: () => void;
   setCharacterLevel: (level: number) => void;
+
+  // Migration Helper
+  _migrateLegacyData: () => void;
 }
 
 const initialSpellSlots: Record<number, boolean[]> = {
@@ -69,53 +87,196 @@ const initialSpellSlots: Record<number, boolean[]> = {
   9: [false],
 };
 
+const createEmptyProfile = (id: string, name: string): Profile => ({
+  id,
+  name,
+  starredSpells: [],
+  customSpells: [],
+  spellSlots: initialSpellSlots,
+  characterLevel: 20
+});
+
 export const useSpellStore = create<SpellStore>()(
   persist(
-    (set) => ({
-      starredSpells: [],
-      customSpells: [],
-      spellSlots: initialSpellSlots,
-      characterLevel: 20,
+    (set, get) => ({
+      profiles: {},
+      activeProfileId: '',
+
+      createProfile: (name) => set((state) => {
+        const id = crypto.randomUUID();
+        return {
+          profiles: {
+            ...state.profiles,
+            [id]: createEmptyProfile(id, name)
+          },
+          activeProfileId: id
+        };
+      }),
+
+      switchProfile: (id) => set({ activeProfileId: id }),
+
+      deleteProfile: (id) => set((state) => {
+        const newProfiles = { ...state.profiles };
+        delete newProfiles[id];
+        const remainingIds = Object.keys(newProfiles);
+
+        return {
+          profiles: newProfiles,
+          activeProfileId: state.activeProfileId === id
+            ? (remainingIds.length > 0 ? remainingIds[0] : '')
+            : state.activeProfileId
+        };
+      }),
+
       toggleStar: (spellId) =>
         set((state) => {
-          const isStarred = state.starredSpells.includes(spellId);
+          const profile = state.profiles[state.activeProfileId];
+          if (!profile) return state;
+
+          const isStarred = profile.starredSpells.includes(spellId);
           return {
-            starredSpells: isStarred
-              ? state.starredSpells.filter((id) => id !== spellId)
-              : [...state.starredSpells, spellId],
+            profiles: {
+              ...state.profiles,
+              [state.activeProfileId]: {
+                ...profile,
+                starredSpells: isStarred
+                  ? profile.starredSpells.filter((id) => id !== spellId)
+                  : [...profile.starredSpells, spellId],
+              }
+            }
           };
         }),
+
       addCustomSpell: (spell) =>
-        set((state) => ({
-          customSpells: [...state.customSpells, { ...spell, isCustom: true }],
-        })),
+        set((state) => {
+          const profile = state.profiles[state.activeProfileId];
+          if (!profile) return state;
+
+          return {
+            profiles: {
+              ...state.profiles,
+              [state.activeProfileId]: {
+                ...profile,
+                customSpells: [...profile.customSpells, { ...spell, isCustom: true }],
+              }
+            }
+          };
+        }),
+
       removeCustomSpell: (spellId) =>
-        set((state) => ({
-          customSpells: state.customSpells.filter((s) => s.id !== spellId),
-          starredSpells: state.starredSpells.filter((id) => id !== spellId),
-        })),
+        set((state) => {
+          const profile = state.profiles[state.activeProfileId];
+          if (!profile) return state;
+
+          return {
+            profiles: {
+              ...state.profiles,
+              [state.activeProfileId]: {
+                ...profile,
+                customSpells: profile.customSpells.filter((s) => s.id !== spellId),
+                starredSpells: profile.starredSpells.filter((id) => id !== spellId),
+              }
+            }
+          };
+        }),
+
       importData: (data) =>
-        set(() => ({
-          starredSpells: data.starredSpells || [],
-          customSpells: data.customSpells || [],
-          spellSlots: data.spellSlots || initialSpellSlots,
-          characterLevel: data.characterLevel || 20,
-        })),
+        set((state) => {
+          if (data.profiles && data.activeProfileId) {
+            return {
+              profiles: data.profiles,
+              activeProfileId: data.activeProfileId
+            };
+          }
+          return state;
+        }),
+
       toggleSpellSlot: (level, index) =>
         set((state) => {
-          const newSlots = { ...state.spellSlots };
+          const profile = state.profiles[state.activeProfileId];
+          if (!profile) return state;
+
+          const newSlots = { ...profile.spellSlots };
           newSlots[level] = [...newSlots[level]];
           newSlots[level][index] = !newSlots[level][index];
-          return { spellSlots: newSlots };
+
+          return {
+            profiles: {
+              ...state.profiles,
+              [state.activeProfileId]: {
+                ...profile,
+                spellSlots: newSlots
+              }
+            }
+          };
         }),
+
       resetSpellSlots: () =>
-        set(() => ({
-          spellSlots: initialSpellSlots,
-        })),
+        set((state) => {
+          const profile = state.profiles[state.activeProfileId];
+          if (!profile) return state;
+
+          return {
+            profiles: {
+              ...state.profiles,
+              [state.activeProfileId]: {
+                ...profile,
+                spellSlots: initialSpellSlots
+              }
+            }
+          };
+        }),
+
       setCharacterLevel: (level) =>
-        set(() => ({
-          characterLevel: level,
-        })),
+        set((state) => {
+          const profile = state.profiles[state.activeProfileId];
+          if (!profile) return state;
+
+          return {
+            profiles: {
+              ...state.profiles,
+              [state.activeProfileId]: {
+                ...profile,
+                characterLevel: level
+              }
+            }
+          };
+        }),
+
+      _migrateLegacyData: () => set((state: any) => {
+        // If we already have profiles, or there's no legacy data, skip
+        if (Object.keys(state.profiles || {}).length > 0 || !state.starredSpells) {
+
+          // Ensure at least one profile exists if empty
+          if (Object.keys(state.profiles || {}).length === 0) {
+            const defaultId = crypto.randomUUID();
+            return {
+              profiles: { [defaultId]: createEmptyProfile(defaultId, 'Default Character') },
+              activeProfileId: defaultId
+            };
+          }
+          return state;
+        }
+
+        const legacyId = crypto.randomUUID();
+        const legacyProfile: Profile = {
+          id: legacyId,
+          name: 'Legacy Character',
+          starredSpells: state.starredSpells || [],
+          customSpells: state.customSpells || [],
+          spellSlots: state.spellSlots || initialSpellSlots,
+          characterLevel: state.characterLevel || 20
+        };
+
+        // Clean up legacy flat keys to prevent carrying duplicate states
+        const newState = { ...state, profiles: { [legacyId]: legacyProfile }, activeProfileId: legacyId };
+        delete newState.starredSpells;
+        delete newState.customSpells;
+        delete newState.spellSlots;
+        delete newState.characterLevel;
+
+        return newState;
+      }),
     }),
     {
       name: 'spellbound-storage', // unique name for local storage key

@@ -5,8 +5,11 @@ import { useSpellStore, Spell } from '@/store/useSpellStore';
 import clsx from 'clsx';
 
 export default function SpellCard({ spell }: { spell: Spell }) {
-    const { starredSpells, toggleStar } = useSpellStore();
-    const isStarred = starredSpells.includes(spell.id);
+    const { profiles, activeProfileId, toggleStar } = useSpellStore();
+
+    const activeProfile = profiles[activeProfileId];
+    // If no profile is loaded yet, assume false to avoid hydration mismatch
+    const isStarred = activeProfile ? activeProfile.starredSpells.includes(spell.id) : false;
 
     return (
         <div className="bg-neutral-800/80 border border-neutral-700/50 rounded-xl overflow-hidden shadow-xl mb-4 text-sm flex flex-col">

@@ -7,14 +7,17 @@ import spellsDataRaw from 'public/spells.json';
 import SpellCard from '@/components/spells/SpellCard';
 
 export default function ExportPage() {
-    const { starredSpells, customSpells, spellSlots, importData } = useSpellStore();
+    const { profiles, activeProfileId, importData, _migrateLegacyData } = useSpellStore();
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [isClient, setIsClient] = useState(false);
 
-    useEffect(() => { setIsClient(true); }, []);
+    useEffect(() => {
+        _migrateLegacyData();
+        setIsClient(true);
+    }, [_migrateLegacyData]);
 
     const handleExport = () => {
-        const dataStr = JSON.stringify({ starredSpells, customSpells, spellSlots }, null, 2);
+        const dataStr = JSON.stringify({ profiles, activeProfileId }, null, 2);
         const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
 
         const exportFileDefaultName = 'spellbound-backup.json';
@@ -33,9 +36,9 @@ export default function ExportPage() {
         reader.onload = (event) => {
             try {
                 const json = JSON.parse(event.target?.result as string);
-                if (json.starredSpells !== undefined || json.customSpells !== undefined) {
+                if (json.profiles && json.activeProfileId) {
                     importData(json);
-                    alert('Spellbook imported successfully!');
+                    alert('Spellbook profiles imported successfully!');
                 } else {
                     alert('Invalid file format.');
                 }
@@ -48,10 +51,13 @@ export default function ExportPage() {
 
     const activeSpells = useMemo(() => {
         if (!isClient) return [];
+        const profile = profiles[activeProfileId];
+        if (!profile) return [];
+
         const baseSpells = (spellsDataRaw as any).allSpells.map(normalizeSpell);
-        const allSpells = [...baseSpells, ...customSpells];
-        return allSpells.filter(s => starredSpells.includes(s.id));
-    }, [starredSpells, customSpells, isClient]);
+        const allSpells = [...baseSpells, ...profile.customSpells];
+        return allSpells.filter(s => profile.starredSpells.includes(s.id));
+    }, [profiles, activeProfileId, isClient]);
 
     return (
         <main className="min-h-screen pb-10">

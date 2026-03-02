@@ -9,19 +9,23 @@ import Link from 'next/link';
 import { BookOpen } from 'lucide-react';
 
 export default function SessionPage() {
-    const { starredSpells, customSpells } = useSpellStore();
+    const { profiles, activeProfileId, _migrateLegacyData } = useSpellStore();
     const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
+        _migrateLegacyData();
         setIsClient(true);
-    }, []);
+    }, [_migrateLegacyData]);
 
     const activeSpells = useMemo(() => {
         if (!isClient) return [];
+        const profile = profiles[activeProfileId];
+        if (!profile) return [];
+
         const baseSpells = (spellsDataRaw as any).allSpells.map(normalizeSpell);
-        const allSpells = [...baseSpells, ...customSpells];
-        return allSpells.filter(spell => starredSpells.includes(spell.id));
-    }, [starredSpells, customSpells, isClient]);
+        const allSpells = [...baseSpells, ...profile.customSpells];
+        return allSpells.filter(spell => profile.starredSpells.includes(spell.id));
+    }, [profiles, activeProfileId, isClient]);
 
     if (!isClient) return null;
 

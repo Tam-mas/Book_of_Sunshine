@@ -7,11 +7,14 @@ import spellsDataRaw from 'public/spells.json';
 import { useSpellStore, Spell, normalizeSpell } from '@/store/useSpellStore';
 
 export default function Home() {
-  const { customSpells } = useSpellStore();
+  const { profiles, activeProfileId, _migrateLegacyData } = useSpellStore();
   const [isClient, setIsClient] = useState(false);
 
   // Avoid hydration mismatch for persisted localStorage states
-  useEffect(() => { setIsClient(true); }, []);
+  useEffect(() => {
+    _migrateLegacyData();
+    setIsClient(true);
+  }, [_migrateLegacyData]);
 
   const [filters, setFilters] = useState<FilterState>({
     search: '',
@@ -23,8 +26,9 @@ export default function Home() {
   const allSpells = useMemo(() => {
     // Combine base spells with user's custom spells
     const baseSpells = (spellsDataRaw as any).allSpells.map(normalizeSpell);
-    return [...baseSpells, ...(isClient ? customSpells : [])];
-  }, [customSpells, isClient]);
+    const customSpells = isClient && profiles[activeProfileId] ? profiles[activeProfileId].customSpells : [];
+    return [...baseSpells, ...customSpells];
+  }, [profiles, activeProfileId, isClient]);
 
   const filteredSpells = useMemo(() => {
     return allSpells.filter((spell) => {
