@@ -4,16 +4,43 @@ import { persist } from 'zustand/middleware';
 export interface Spell {
   id: string;
   name: string;
-  level: number;
+  level: number | string;
   school?: string;
   casting_time?: string;
+  castingTime?: string;
   action_type: string; // "Action", "Bonus Action", "Reaction", "Minute", etc.
   range?: string;
   components?: string;
   duration?: string;
   concentration: boolean;
   text: string;
+  description?: string;
   isCustom?: boolean;
+  classes?: string;
+  ritual?: boolean;
+  material?: string | null;
+  source?: string;
+  page?: number;
+}
+
+export function normalizeSpell(s: any): Spell {
+  const isConcentration = s.concentration ?? (s.duration?.toLowerCase().includes('concentration') || false);
+  const actionType = s.action_type || (
+    s.castingTime?.toLowerCase().includes('bonus') ? 'Bonus Action'
+      : s.castingTime?.toLowerCase().includes('reaction') ? 'Reaction'
+        : 'Action'
+  );
+
+  return {
+    ...s,
+    id: s.id || s.name.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+    name: s.name,
+    level: s.level === 'cantrip' ? 'cantrip' : (s.level || 0),
+    casting_time: s.casting_time || s.castingTime || '',
+    action_type: actionType,
+    text: s.text || s.description || '',
+    concentration: isConcentration,
+  };
 }
 
 interface SpellStore {
