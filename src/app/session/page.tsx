@@ -3,8 +3,8 @@
 import { useMemo, useEffect, useState } from 'react';
 import SpellCard from '@/components/spells/SpellCard';
 import SpellSlotTracker from '@/components/session/SpellSlotTracker';
-import { useSpellStore, Spell } from '@/store/useSpellStore';
-import spellsData from '@/data/spells.json';
+import { useSpellStore, Spell, normalizeSpell } from '@/store/useSpellStore';
+import spellsDataRaw from 'public/spells.json';
 import Link from 'next/link';
 import { BookOpen } from 'lucide-react';
 
@@ -18,7 +18,8 @@ export default function SessionPage() {
 
     const activeSpells = useMemo(() => {
         if (!isClient) return [];
-        const allSpells = [...(spellsData as Spell[]), ...customSpells];
+        const baseSpells = (spellsDataRaw as any).allSpells.map(normalizeSpell);
+        const allSpells = [...baseSpells, ...customSpells];
         return allSpells.filter(spell => starredSpells.includes(spell.id));
     }, [starredSpells, customSpells, isClient]);
 

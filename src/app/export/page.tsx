@@ -1,9 +1,9 @@
 'use client';
 
-import { useSpellStore, Spell } from '@/store/useSpellStore';
+import { useSpellStore, Spell, normalizeSpell } from '@/store/useSpellStore';
 import { Download, Upload, Printer } from 'lucide-react';
-import { useRef, useState, useEffect } from 'react';
-import spellsData from '@/data/spells.json';
+import { useRef, useState, useEffect, useMemo } from 'react';
+import spellsDataRaw from 'public/spells.json';
 import SpellCard from '@/components/spells/SpellCard';
 
 export default function ExportPage() {
@@ -46,7 +46,12 @@ export default function ExportPage() {
         reader.readAsText(file);
     };
 
-    const activeSpells = isClient ? [...(spellsData as Spell[]), ...customSpells].filter(s => starredSpells.includes(s.id)) : [];
+    const activeSpells = useMemo(() => {
+        if (!isClient) return [];
+        const baseSpells = (spellsDataRaw as any).allSpells.map(normalizeSpell);
+        const allSpells = [...baseSpells, ...customSpells];
+        return allSpells.filter(s => starredSpells.includes(s.id));
+    }, [starredSpells, customSpells, isClient]);
 
     return (
         <main className="min-h-screen pb-10">

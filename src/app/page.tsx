@@ -3,8 +3,8 @@
 import { useState, useMemo, useEffect } from 'react';
 import SpellCard from '@/components/spells/SpellCard';
 import FilterBar, { FilterState } from '@/components/spells/FilterBar';
-import spellsData from '@/data/spells.json';
-import { useSpellStore, Spell } from '@/store/useSpellStore';
+import spellsDataRaw from 'public/spells.json';
+import { useSpellStore, Spell, normalizeSpell } from '@/store/useSpellStore';
 
 export default function Home() {
   const { customSpells } = useSpellStore();
@@ -22,7 +22,8 @@ export default function Home() {
 
   const allSpells = useMemo(() => {
     // Combine base spells with user's custom spells
-    return [...(spellsData as Spell[]), ...(isClient ? customSpells : [])];
+    const baseSpells = (spellsDataRaw as any).allSpells.map(normalizeSpell);
+    return [...baseSpells, ...(isClient ? customSpells : [])];
   }, [customSpells, isClient]);
 
   const filteredSpells = useMemo(() => {
