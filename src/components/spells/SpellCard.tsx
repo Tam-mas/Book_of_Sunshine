@@ -13,9 +13,9 @@ export default function SpellCard({ spell }: { spell: Spell }) {
     const isStarred = activeProfile ? activeProfile.starredSpells.includes(spell.id) : false;
 
     return (
-        <div className="bg-neutral-800/80 border border-neutral-700/50 rounded-xl overflow-hidden shadow-xl mb-4 text-sm flex flex-col">
+        <div className="bg-neutral-800/80 border border-neutral-700/50 rounded-xl shadow-xl mb-4 text-sm flex flex-col relative z-0 hover:z-10 transition-all">
             {/* Header */}
-            <div className="bg-neutral-900 p-4 border-b border-neutral-700/50 flex justify-between items-start">
+            <div className="bg-neutral-900 p-4 border-b border-neutral-700/50 flex justify-between items-start rounded-t-xl">
                 <div>
                     <h3 className="text-xl font-bold text-amber-500 font-serif tracking-wide">{spell.name}</h3>
                     <p className="text-neutral-400 italic mt-0.5">

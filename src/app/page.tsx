@@ -57,8 +57,8 @@ export default function Home() {
     <main className="min-h-screen">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-4xl font-extrabold text-amber-500 font-serif tracking-tight">Spellbound</h1>
-          <p className="text-neutral-400 mt-1">The Arcanist&apos;s Compendium</p>
+          <h1 className="text-4xl font-extrabold text-amber-500 font-serif tracking-tight">New Sunshine</h1>
+          <p className="text-neutral-400 mt-1">Still got it</p>
         </div>
       </div>
 

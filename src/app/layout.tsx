@@ -4,8 +4,8 @@ import Navigation from '@/components/layout/Navigation';
 import ProfileSelector from '@/components/layout/ProfileSelector';
 
 export const metadata: Metadata = {
-  title: 'Spellbound',
-  description: 'D&D Offline Spellbook Manager',
+  title: 'New Sunshine',
+  description: 'Still got it',
   manifest: '/manifest.json',
 };
 
