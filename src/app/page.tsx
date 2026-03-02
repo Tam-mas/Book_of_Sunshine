@@ -5,6 +5,13 @@ import SpellCard from '@/components/spells/SpellCard';
 import FilterBar, { FilterState } from '@/components/spells/FilterBar';
 import spellsDataRaw from 'public/spells.json';
 import { useSpellStore, Spell, normalizeSpell } from '@/store/useSpellStore';
+import { Lacquer } from 'next/font/google';
+
+const lacquer = Lacquer({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 export default function Home() {
   const { profiles, activeProfileId, _migrateLegacyData } = useSpellStore();
@@ -57,7 +64,7 @@ export default function Home() {
     <main className="min-h-screen">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-4xl font-extrabold text-amber-500 font-serif tracking-tight">New Sunshine</h1>
+          <h1 className={`text-4xl text-amber-500 tracking-tight ${lacquer.className}`}>New Sunshine</h1>
           <p className="text-neutral-400 mt-1">Still got it</p>
         </div>
       </div>

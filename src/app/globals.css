@@ -39,3 +39,9 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #444;
 }
+
+.lacquer-regular {
+  font-family: "Lacquer", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
