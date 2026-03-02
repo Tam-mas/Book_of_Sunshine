@@ -7,7 +7,7 @@ import spellsDataRaw from 'public/spells.json';
 import SpellCard from '@/components/spells/SpellCard';
 
 export default function ExportPage() {
-    const { profiles, activeProfileId, importData, _migrateLegacyData } = useSpellStore();
+    const { profiles, activeProfileId, importData, _migrateLegacyData, showGlossary, setShowGlossary } = useSpellStore();
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [isClient, setIsClient] = useState(false);
 
@@ -64,6 +64,28 @@ export default function ExportPage() {
             <div className="mb-6 print:hidden">
                 <h1 className="text-3xl font-extrabold text-amber-500 font-serif tracking-tight">Grimoire Management</h1>
                 <p className="text-neutral-400 mt-1">Export, Import, and Print your spellbook</p>
+            </div>
+
+            <div className="bg-neutral-800/80 p-6 rounded-xl border border-neutral-700/50 shadow-lg text-left mb-8 print:hidden">
+                <h2 className="text-xl font-bold text-neutral-200 mb-2 font-serif">Preferences</h2>
+                <div className="flex items-center justify-between">
+                    <div>
+                        <p className="text-neutral-300 font-medium">Smart Glossary Links</p>
+                        <p className="text-sm text-neutral-500 mt-1">Automatically highlight and define D&D terminology in spell descriptions.</p>
+                    </div>
+                    <button
+                        onClick={() => setShowGlossary(!showGlossary)}
+                        className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-neutral-900 ${showGlossary ? 'bg-amber-500' : 'bg-neutral-600'
+                            }`}
+                        aria-pressed={showGlossary}
+                        aria-label="Toggle Glossary"
+                    >
+                        <span
+                            className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${showGlossary ? 'translate-x-6' : 'translate-x-1'
+                                }`}
+                        />
+                    </button>
+                </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 print:hidden">

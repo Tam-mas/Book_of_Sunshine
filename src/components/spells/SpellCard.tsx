@@ -3,6 +3,7 @@
 import { Star } from 'lucide-react';
 import { useSpellStore, Spell } from '@/store/useSpellStore';
 import clsx from 'clsx';
+import SmartText from './SmartText';
 
 export default function SpellCard({ spell }: { spell: Spell }) {
     const { profiles, activeProfileId, toggleStar } = useSpellStore();
@@ -58,10 +59,8 @@ export default function SpellCard({ spell }: { spell: Spell }) {
             </div>
 
             {/* Spell Text */}
-            <div className="p-4 text-neutral-300 leading-relaxed space-y-3">
-                {spell.text.split('\n').filter(Boolean).map((para, i) => (
-                    <p key={i}>{para}</p>
-                ))}
+            <div className="p-4 text-neutral-300 leading-relaxed">
+                <SmartText text={spell.text} />
             </div>
         </div>
     );

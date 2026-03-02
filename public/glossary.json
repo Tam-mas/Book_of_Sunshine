@@ -1,0 +1,277 @@
+[
+    {
+        "name": "Ammunition",
+        "description": "You can use a weapon that has the Ammunition property to make a ranged attack only if you have ammunition to fire from it. Each attack expends one piece of ammunition. Drawing the ammunition is part of the attack. After a fight, you can spend 1 minute to recover half the ammunition used.",
+        "category": "Weapon Property"
+    },
+    {
+        "name": "Finesse",
+        "description": "When making an attack with a Finesse weapon, use your choice of your Strength or Dexterity modifier for the attack and damage rolls. You must use the same modifier for both rolls.",
+        "category": "Weapon Property"
+    },
+    {
+        "name": "Heavy",
+        "description": "You have Disadvantage on attack rolls with a Heavy weapon if it's a Melee weapon and your Strength score isn't at least 13 or if it's a Ranged weapon and your Dexterity score isn't at least 13.",
+        "category": "Weapon Property"
+    },
+    {
+        "name": "Light",
+        "description": "When you take the Attack action on your turn and attack with a Light weapon, you can make one extra attack as a Bonus Action later on the same turn. That extra attack must be made with a different Light weapon.",
+        "category": "Weapon Property"
+    },
+    {
+        "name": "Loading",
+        "description": "You can fire only one piece of ammunition from a Loading weapon when you use an action, a Bonus Action, or a Reaction to fire it, regardless of the number of attacks you can normally make.",
+        "category": "Weapon Property"
+    },
+    {
+        "name": "Range",
+        "description": "A Range weapon lists two numbers. The first is the weapon's normal range in feet, and the second is the long range. Attacks beyond normal range have Disadvantage. You can't attack beyond the long range.",
+        "category": "Weapon Property"
+    },
+    {
+        "name": "Reach",
+        "description": "A Reach weapon adds 5 feet to your reach when you attack with it, as well as when determining your reach for Opportunity Attacks with it.",
+        "category": "Weapon Property"
+    },
+    {
+        "name": "Thrown",
+        "description": "If a weapon has the Thrown property, you can throw the weapon to make a ranged attack, and you can draw that weapon as part of the attack.",
+        "category": "Weapon Property"
+    },
+    {
+        "name": "Two-Handed",
+        "description": "A Two-Handed weapon requires two hands when you attack with it.",
+        "category": "Weapon Property"
+    },
+    {
+        "name": "Versatile",
+        "description": "A Versatile weapon can be used with one or two hands. The weapon deals increased damage when used with two hands to make a melee attack.",
+        "category": "Weapon Property"
+    },
+    {
+        "name": "Acid",
+        "description": "Corrosive liquids, digestive enzymes.",
+        "category": "Damage Type"
+    },
+    {
+        "name": "Bludgeoning",
+        "description": "Blunt objects, constriction, falling.",
+        "category": "Damage Type"
+    },
+    {
+        "name": "Cold",
+        "description": "Freezing water, icy blasts.",
+        "category": "Damage Type"
+    },
+    {
+        "name": "Fire",
+        "description": "Flames, unbearable heat.",
+        "category": "Damage Type"
+    },
+    {
+        "name": "Force",
+        "description": "Pure magical energy.",
+        "category": "Damage Type"
+    },
+    {
+        "name": "Lightning",
+        "description": "Electricity.",
+        "category": "Damage Type"
+    },
+    {
+        "name": "Necrotic",
+        "description": "Life-draining energy.",
+        "category": "Damage Type"
+    },
+    {
+        "name": "Piercing",
+        "description": "Fangs, puncturing objects.",
+        "category": "Damage Type"
+    },
+    {
+        "name": "Poison",
+        "description": "Toxic gas, venom.",
+        "category": "Damage Type"
+    },
+    {
+        "name": "Psychic",
+        "description": "Mind-rending energy.",
+        "category": "Damage Type"
+    },
+    {
+        "name": "Radiant",
+        "description": "Holy energy, searing radiation.",
+        "category": "Damage Type"
+    },
+    {
+        "name": "Slashing",
+        "description": "Claws, cutting objects.",
+        "category": "Damage Type"
+    },
+    {
+        "name": "Thunder",
+        "description": "Concussive sound.",
+        "category": "Damage Type"
+    },
+    {
+        "name": "Cleave",
+        "description": "If you hit a creature with a melee attack, you can make a second attack against a creature within 5 feet of the first that is also within reach. On a hit, it takes the weapon's damage.",
+        "category": "Weapon Mastery"
+    },
+    {
+        "name": "Graze",
+        "description": "If your attack misses, you can deal damage equal to the ability modifier used to make the attack roll.",
+        "category": "Weapon Mastery"
+    },
+    {
+        "name": "Nick",
+        "description": "The extra attack of the Light property can be made as part of the Attack action instead of as a Bonus Action.",
+        "category": "Weapon Mastery"
+    },
+    {
+        "name": "Push",
+        "description": "If you hit a creature, you can push it up to 10 feet straight away from yourself if it is Large or smaller.",
+        "category": "Weapon Mastery"
+    },
+    {
+        "name": "Sap",
+        "description": "If you hit a creature, that creature has Disadvantage on its next attack roll before the start of your next turn.",
+        "category": "Weapon Mastery"
+    },
+    {
+        "name": "Slow",
+        "description": "If you hit a creature and deal damage, you can reduce its Speed by 10 feet until the start of your next turn.",
+        "category": "Weapon Mastery"
+    },
+    {
+        "name": "Topple",
+        "description": "If you hit a creature, you can force it to make a Constitution saving throw. On a failed save, the creature has the Prone condition.",
+        "category": "Weapon Mastery"
+    },
+    {
+        "name": "Vex",
+        "description": "If you hit a creature and deal damage, you have Advantage on your next attack roll against that creature before the end of your next turn.",
+        "category": "Weapon Mastery"
+    },
+    {
+        "name": "Strength",
+        "description": "Physical might and Athletics checks.",
+        "category": "Ability Score"
+    },
+    {
+        "name": "Dexterity",
+        "description": "Agility, reflexes, and balance. Covers Acrobatics, Sleight of Hand, and Stealth.",
+        "category": "Ability Score"
+    },
+    {
+        "name": "Constitution",
+        "description": "Health and stamina.",
+        "category": "Ability Score"
+    },
+    {
+        "name": "Intelligence",
+        "description": "Reasoning and memory. Covers Arcana, History, Investigation, Nature, and Religion.",
+        "category": "Ability Score"
+    },
+    {
+        "name": "Wisdom",
+        "description": "Perceptiveness and mental fortitude. Covers Animal Handling, Insight, Medicine, Perception, and Survival.",
+        "category": "Ability Score"
+    },
+    {
+        "name": "Charisma",
+        "description": "Confidence, poise, and charm. Covers Deception, Intimidation, Performance, and Persuasion.",
+        "category": "Ability Score"
+    },
+    {
+        "name": "Acrobatics",
+        "description": "Stay on your feet in a tricky situation, or perform an acrobatic stunt.",
+        "category": "Skill"
+    },
+    {
+        "name": "Athletics",
+        "description": "Jump farther than normal, stay afloat in rough water, or break something.",
+        "category": "Skill"
+    },
+    {
+        "name": "Arcana",
+        "description": "Recall lore about spells, magic items, and the planes of existence.",
+        "category": "Skill"
+    },
+    {
+        "name": "Blinded",
+        "description": "You can't see and automatically fail sight-based checks. Attack rolls against you have Advantage; your attack rolls have Disadvantage.",
+        "category": "Condition"
+    },
+    {
+        "name": "Charmed",
+        "description": "You can't attack the charmer. The charmer has Advantage on social ability checks against you.",
+        "category": "Condition"
+    },
+    {
+        "name": "Deafened",
+        "description": "You can't hear and automatically fail hearing-based checks.",
+        "category": "Condition"
+    },
+    {
+        "name": "Exhaustion",
+        "description": "This condition is cumulative (up to 6 levels). Each level reduces D20 tests by 2 and Speed by 5 feet. Level 6 is death.",
+        "category": "Condition"
+    },
+    {
+        "name": "Frightened",
+        "description": "Disadvantage on checks/attacks while source is in sight. You can't willingly move closer to the source.",
+        "category": "Condition"
+    },
+    {
+        "name": "Grappled",
+        "description": "Speed is 0. Disadvantage on attacks against targets other than the grappler.",
+        "category": "Condition"
+    },
+    {
+        "name": "Incapacitated",
+        "description": "You can't take actions, bonus actions, or reactions. Concentration is broken and you can't speak.",
+        "category": "Condition"
+    },
+    {
+        "name": "Invisible",
+        "description": "Advantage on Initiative. You are concealed from sight. Attack rolls against you have Disadvantage; your attack rolls have Advantage.",
+        "category": "Condition"
+    },
+    {
+        "name": "Paralyzed",
+        "description": "Incapacitated. Speed 0. Auto-fail STR and DEX saves. Attacks against you have Advantage and are auto-crits within 5 feet.",
+        "category": "Condition"
+    },
+    {
+        "name": "Petrified",
+        "description": "Transformed into stone. Incapacitated. Speed 0. Resistance to all damage and immune to Poison.",
+        "category": "Condition"
+    },
+    {
+        "name": "Poisoned",
+        "description": "Disadvantage on attack rolls and ability checks.",
+        "category": "Condition"
+    },
+    {
+        "name": "Prone",
+        "description": "Movement is restricted to crawling. Disadvantage on your attacks. Attacks against you have Advantage if within 5 feet.",
+        "category": "Condition"
+    },
+    {
+        "name": "Restrained",
+        "description": "Speed 0. Attacks against you have Advantage; your attacks have Disadvantage. Disadvantage on DEX saves.",
+        "category": "Condition"
+    },
+    {
+        "name": "Stunned",
+        "description": "Incapacitated. Auto-fail STR and DEX saves. Attacks against you have Advantage.",
+        "category": "Condition"
+    },
+    {
+        "name": "Unconscious",
+        "description": "Incapacitated and Prone. Speed 0. Auto-fail STR and DEX saves. Attacks against you have Advantage and are auto-crits within 5 feet.",
+        "category": "Condition"
+    }
+]

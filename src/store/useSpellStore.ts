@@ -56,6 +56,7 @@ interface SpellStore {
   // Global Profile State
   profiles: Record<string, Profile>;
   activeProfileId: string;
+  showGlossary: boolean;
 
   // Profile Management Actions
   createProfile: (name: string) => void;
@@ -73,6 +74,9 @@ interface SpellStore {
 
   // Migration Helper
   _migrateLegacyData: () => void;
+
+  // Settings Actions
+  setShowGlossary: (show: boolean) => void;
 }
 
 const initialSpellSlots: Record<number, boolean[]> = {
@@ -101,6 +105,7 @@ export const useSpellStore = create<SpellStore>()(
     (set, get) => ({
       profiles: {},
       activeProfileId: '',
+      showGlossary: true,
 
       createProfile: (name) => set((state) => {
         const id = crypto.randomUUID();
@@ -242,6 +247,8 @@ export const useSpellStore = create<SpellStore>()(
             }
           };
         }),
+
+      setShowGlossary: (show) => set({ showGlossary: show }),
 
       _migrateLegacyData: () => set((state: any) => {
         // If we already have profiles, or there's no legacy data, skip
