@@ -1,8 +1,8 @@
-# 🧙‍♂️ Spellbound
+# 🧙‍♂️ Book of Sunshine
 
 > **The Arcanist's Compendium.** A mobile-first, offline-capable Progressive Web App for D&D 5e players to search, filter, and curate their own spellbooks.
 
-![Spellbound App Banner](public/icon-512x512.png) *(Note: Replace with actual screenshot/banner if desired)*
+![Book of Sunshine App Banner](public/icon-512x512.png) *(Note: Replace with actual screenshot/banner if desired)*
 
 ## ✨ Features
 

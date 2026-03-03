@@ -4,8 +4,8 @@ import Navigation from '@/components/layout/Navigation';
 import ProfileSelector from '@/components/layout/ProfileSelector';
 
 export const metadata: Metadata = {
-  title: 'New Sunshine',
-  description: 'Still got it',
+  title: 'Book of Sunshine',
+  description: 'Book of Sunshine',
   manifest: '/manifest.json',
 };
 

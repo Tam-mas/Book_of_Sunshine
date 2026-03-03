@@ -6,6 +6,7 @@ import FilterBar, { FilterState } from '@/components/spells/FilterBar';
 import spellsDataRaw from 'public/spells.json';
 import { useSpellStore, Spell, normalizeSpell } from '@/store/useSpellStore';
 import { Lacquer } from 'next/font/google';
+import subtags from '@/data/subtags.json';
 
 const lacquer = Lacquer({
   weight: '400',
@@ -16,11 +17,14 @@ const lacquer = Lacquer({
 export default function Home() {
   const { profiles, activeProfileId, _migrateLegacyData } = useSpellStore();
   const [isClient, setIsClient] = useState(false);
+  const [subtag, setSubtag] = useState('Still got it');
 
   // Avoid hydration mismatch for persisted localStorage states
   useEffect(() => {
     _migrateLegacyData();
     setIsClient(true);
+    const randomIndex = Math.floor(Math.random() * subtags.length);
+    setSubtag(subtags[randomIndex]);
   }, [_migrateLegacyData]);
 
   const [filters, setFilters] = useState<FilterState>({
@@ -64,8 +68,8 @@ export default function Home() {
     <main className="min-h-screen">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className={`text-4xl text-amber-500 tracking-tight ${lacquer.className}`}>New Sunshine</h1>
-          <p className="text-neutral-400 mt-1">Still got it</p>
+          <h1 className={`text-4xl text-amber-500 tracking-tight ${lacquer.className}`}>Book of Sunshine</h1>
+          <p className="text-neutral-400 mt-1">{subtag}</p>
         </div>
       </div>
 

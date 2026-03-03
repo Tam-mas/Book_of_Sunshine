@@ -20,7 +20,7 @@ export default function ExportPage() {
         const dataStr = JSON.stringify({ profiles, activeProfileId }, null, 2);
         const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
 
-        const exportFileDefaultName = 'new-sunshine-backup.json';
+        const exportFileDefaultName = 'book-of-sunshine-backup.json';
 
         const linkElement = document.createElement('a');
         linkElement.setAttribute('href', dataUri);
