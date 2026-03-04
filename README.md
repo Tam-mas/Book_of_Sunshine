@@ -6,13 +6,15 @@
 
 ## ✨ Features
 
-* 📚 **Interactive Spell Library**: Search and filter hundreds of 5e spells instantly by level, action type, and concentration requirements.
+* 📚 **Interactive Spell Library**: Search and filter hundreds of 5e spells instantly by level, action type, concentration requirements, and **Character Class**.
+* 🎭 **Multiple Character Profiles**: Create, manage, and switch between different characters, each with their own personal spellbook, active spell slots, and character level saved persistently.
+* ✨ **Smart Glossary**: Spell descriptions automatically identify, highlight, and define D&D terminology inline with hover tooltips and interactive drawers for mobile.
 * ⚔️ **Session Mode & Spell Tracker**: Star your prepared spells for the day and manage your expended spell slots with an interactive, level-scaling tracker (Levels 1-20 full-caster progression).
 * 📝 **Homebrew Ready**: Manually scribe custom spells or homebrew items into your grimoire using the intuitive Add form.
 * 💾 **Offline First**: Built to work at the table. All data, custom spells, and active slots are saved strictly to your device's `localStorage` using Zustand persistence. No account required.
 * 📤 **Export & Import**: Safely back up your spellbook metadata and custom spells to a local JSON file, or restore them across devices.
 * 🖨️ **Print Your Deck**: Use the dedicated Print View (built with `@media print` CSS) to generate physical, stripped-down spell cards for your next in-person session.
-* 🌙 **Low-Light Aesthetic**: High-contrast, dark-themed UI specifically tailored for dimly lit gaming rooms.
+* 🌙 **Thematic Aesthetic**: High-contrast, dark-themed UI featuring the *Lacquer* font and safety-vest amber highlights, specifically tailored for dimly lit gaming rooms.
 
 ## 🛠️ Tech Stack
 
@@ -41,5 +43,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ### PWA Installation
 To install the app on your mobile device, open the app in Safari (iOS) or Chrome (Android) and select **"Add to Home Screen"**. It functions completely offline once loaded!
 
-## 📜 Data Source
-By default, the application pulls spell definitions from `public/spells.json`. You can easily swap or expand this index with your own spells. Ensure your JSON adheres to the `allSpells` array structure utilized by the store normalizer. Level 0 spells are automatically parsed as cantrips.
+## 📜 Data Source & Legal
+By default, the application pulls spell definitions from `public/spells.json` and glossary terms from `public/glossary.json`. You can easily swap or expand this index with your own spells. Ensure your JSON adheres to the `allSpells` array structure utilized by the store normalizer. Level 0 spells are automatically parsed as cantrips.
+
+This work includes material from the System Reference Document 5.2 (“SRD 5.2”) by Wizards of the Coast LLC, available at [https://www.dndbeyond.com/srd](https://www.dndbeyond.com/srd). The SRD 5.2 is licensed under the Creative Commons Attribution 4.0 International License, available at [https://creativecommons.org/licenses/by/4.0/legalcode](https://creativecommons.org/licenses/by/4.0/legalcode).
