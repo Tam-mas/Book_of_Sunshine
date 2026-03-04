@@ -2,7 +2,7 @@
 
 > **The Arcanist's Compendium.** A mobile-first, offline-capable Progressive Web App for D&D 5e players to search, filter, and curate their own spellbooks.
 
-![Book of Sunshine App Banner](public/icon-512x512.png) *(Note: Replace with actual screenshot/banner if desired)*
+<img width="3168" height="1344" alt="Gemini_Generated_Image_hqjkqlhqjkqlhqjk" src="https://github.com/user-attachments/assets/6f4e3705-993f-49c8-a334-168a0da39ead" />
 
 ## ✨ Features
 
