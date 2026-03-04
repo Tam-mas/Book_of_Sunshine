@@ -50,6 +50,7 @@ export interface Profile {
   customSpells: Spell[];
   spellSlots: Record<number, boolean[]>;
   characterLevel: number;
+  selectedClass: string;
 }
 
 interface SpellStore {
@@ -64,6 +65,7 @@ interface SpellStore {
   deleteProfile: (id: string) => void;
 
   // Active Profile Actions
+  setSelectedClass: (cls: string) => void;
   toggleStar: (spellId: string) => void;
   addCustomSpell: (spell: Spell) => void;
   removeCustomSpell: (spellId: string) => void;
@@ -97,7 +99,8 @@ const createEmptyProfile = (id: string, name: string): Profile => ({
   starredSpells: [],
   customSpells: [],
   spellSlots: initialSpellSlots,
-  characterLevel: 20
+  characterLevel: 20,
+  selectedClass: 'All Classes'
 });
 
 export const useSpellStore = create<SpellStore>()(
@@ -106,6 +109,22 @@ export const useSpellStore = create<SpellStore>()(
       profiles: {},
       activeProfileId: '',
       showGlossary: true,
+
+      setSelectedClass: (cls) =>
+        set((state) => {
+          const profile = state.profiles[state.activeProfileId];
+          if (!profile) return state;
+
+          return {
+            profiles: {
+              ...state.profiles,
+              [state.activeProfileId]: {
+                ...profile,
+                selectedClass: cls
+              }
+            }
+          };
+        }),
 
       createProfile: (name) => set((state) => {
         const id = crypto.randomUUID();
@@ -272,7 +291,8 @@ export const useSpellStore = create<SpellStore>()(
           starredSpells: state.starredSpells || [],
           customSpells: state.customSpells || [],
           spellSlots: state.spellSlots || initialSpellSlots,
-          characterLevel: state.characterLevel || 20
+          characterLevel: state.characterLevel || 20,
+          selectedClass: state.selectedClass || 'All Classes'
         };
 
         // Clean up legacy flat keys to prevent carrying duplicate states
@@ -281,6 +301,7 @@ export const useSpellStore = create<SpellStore>()(
         delete newState.customSpells;
         delete newState.spellSlots;
         delete newState.characterLevel;
+        delete newState.selectedClass;
 
         return newState;
       }),

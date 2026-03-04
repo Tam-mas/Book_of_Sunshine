@@ -3,6 +3,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import SpellCard from '@/components/spells/SpellCard';
 import FilterBar, { FilterState } from '@/components/spells/FilterBar';
+import ClassFilter from '@/components/spells/ClassFilter';
 import spellsDataRaw from 'public/spells.json';
 import { useSpellStore, Spell, normalizeSpell } from '@/store/useSpellStore';
 import { Lacquer } from 'next/font/google';
@@ -60,9 +61,18 @@ export default function Home() {
         if (spell.concentration !== wantsConcentration) return false;
       }
 
+      // Class Match
+      const activeProfile = isClient ? profiles[activeProfileId] : null;
+      if (activeProfile && activeProfile.selectedClass !== 'All Classes') {
+        const spellClasses = spell.classes?.split(',').map((c: string) => c.trim()) || [];
+        if (!spellClasses.includes(activeProfile.selectedClass)) {
+          return false;
+        }
+      }
+
       return true;
     });
-  }, [allSpells, filters]);
+  }, [allSpells, filters, profiles, activeProfileId, isClient]);
 
   return (
     <main className="min-h-screen">
@@ -72,6 +82,8 @@ export default function Home() {
           <p className="text-neutral-400 mt-1">{subtag}</p>
         </div>
       </div>
+
+      <ClassFilter />
 
       <FilterBar filters={filters} setFilters={setFilters} />
 
