@@ -150,6 +150,15 @@ export default function ExportPage() {
             <div className="block print:hidden text-center text-neutral-500 italic mt-8 text-sm">
                 Use the print button above to preview the PDF deck layout!
             </div>
+
+            <div className="mt-12 text-center text-xs text-neutral-500 max-w-2xl mx-auto print:hidden px-4 border-t border-neutral-800 pt-8">
+                <p>
+                    This work includes material from the System Reference Document 5.2 (&ldquo;SRD 5.2&rdquo;) by Wizards of the Coast LLC, available at <a href="https://www.dndbeyond.com/srd" className="underline hover:text-amber-500 transition-colors" target="_blank" rel="noopener noreferrer">https://www.dndbeyond.com/srd</a>.
+                </p>
+                <p className="mt-2">
+                    The SRD 5.2 is licensed under the Creative Commons Attribution 4.0 International License, available at <a href="https://creativecommons.org/licenses/by/4.0/legalcode" className="underline hover:text-amber-500 transition-colors" target="_blank" rel="noopener noreferrer">https://creativecommons.org/licenses/by/4.0/legalcode</a>.
+                </p>
+            </div>
         </main>
     );
 }
