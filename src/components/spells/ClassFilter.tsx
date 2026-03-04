@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 
 const CLASSES = [
     'All Classes',
-    'Artificer',
     'Bard',
     'Cleric',
     'Druid',

@@ -28,8 +28,19 @@ export default function SmartText({ text }: { text: string }) {
 
     const paragraphs = useMemo(() => {
         const paras = text.split('\n').filter(Boolean);
+
+        // Helper to render basic markdown bold syntax for when glossary is off
+        const renderBold = (str: string) => {
+            return str.split(/(\*\*.*?\*\*)/g).map((s, idx) => {
+                if (s.startsWith('**') && s.endsWith('**')) {
+                    return <strong key={`b-${idx}`} className="text-neutral-200 font-bold">{s.slice(2, -2)}</strong>;
+                }
+                return s;
+            });
+        };
+
         if (!showGlossary) {
-            return paras.map((para, i) => <p key={i}>{para}</p>);
+            return paras.map((para, i) => <p key={i}>{renderBold(para)}</p>);
         }
 
         const seen = new Set<string>();
@@ -37,6 +48,16 @@ export default function SmartText({ text }: { text: string }) {
         return paras.map((para, i) => {
             const parts = para.split(termsRegex);
             const nodes = [];
+
+            // Helper to render basic markdown bold syntax
+            const renderBold = (str: string) => {
+                return str.split(/(\*\*.*?\*\*)/g).map((s, idx) => {
+                    if (s.startsWith('**') && s.endsWith('**')) {
+                        return <strong key={idx} className="text-neutral-200 font-bold">{s.slice(2, -2)}</strong>;
+                    }
+                    return s;
+                });
+            };
 
             for (let j = 0; j < parts.length; j++) {
                 const part = parts[j];
@@ -66,10 +87,10 @@ export default function SmartText({ text }: { text: string }) {
                             </span>
                         );
                     } else {
-                        nodes.push(part);
+                        nodes.push(...renderBold(part));
                     }
                 } else {
-                    nodes.push(part);
+                    nodes.push(...renderBold(part));
                 }
             }
             return <p key={i}>{nodes}</p>;

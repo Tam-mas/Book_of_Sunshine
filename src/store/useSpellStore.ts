@@ -23,23 +23,48 @@ export interface Spell {
   page?: number;
 }
 
-export function normalizeSpell(s: any): Spell {
-  const isConcentration = s.concentration ?? (s.duration?.toLowerCase().includes('concentration') || false);
-  const actionType = s.action_type || (
-    s.castingTime?.toLowerCase().includes('bonus') ? 'Bonus Action'
-      : s.castingTime?.toLowerCase().includes('reaction') ? 'Reaction'
+function formatRawSpellText(text: string): string {
+  if (!text) return "";
+  let formatted = text.replace(/\\n/g, '\n');
+
+  // Fix inline headers like "Targeted Effects:" or "At Higher Levels:"
+  formatted = formatted.replace(/(?:([.!?])\s+|\b)(At Higher Levels|[A-Z][a-zA-Z]*(?:\s+[a-zA-Z]+){0,3}):\s/g, (match, punc, header) => {
+    const prefix = punc ? `${punc}\n\n` : ``;
+    return `${prefix}**${header}:** `;
+  });
+
+  // Fix list items like "1-Red: " or "1. "
+  formatted = formatted.replace(/([.!?\])])\s+(\d+(?:-[a-zA-Z]+)?:\s*|\d+\.\s*)/g, (match, punc, listPoint) => {
+    return `${punc}\n\n**${listPoint.trim()}** `;
+  });
+
+  // Clean up excessive newlines
+  formatted = formatted.replace(/\n{3,}/g, '\n\n');
+  return formatted.trim();
+}
+
+export const normalizeSpell = (raw: any): Spell => {
+  const isConcentration = raw.concentration ?? (raw.duration?.toLowerCase().includes('concentration') || false);
+  const actionType = raw.action_type || (
+    raw.castingTime?.toLowerCase().includes('bonus') ? 'Bonus Action'
+      : raw.castingTime?.toLowerCase().includes('reaction') ? 'Reaction'
         : 'Action'
   );
 
   return {
-    ...s,
-    id: s.id || s.name.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
-    name: s.name,
-    level: s.level === 'cantrip' ? 'cantrip' : (s.level || 0),
-    casting_time: s.casting_time || s.castingTime || '',
+    ...raw,
+    id: raw.id || raw.name.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+    name: raw.name,
+    level: raw.level === 'cantrip' ? 'cantrip' : (raw.level || 0),
+    casting_time: raw.casting_time || raw.castingTime || '',
     action_type: actionType,
-    text: s.text || s.description || '',
+    range: raw.range || '',
+    components: raw.components || '',
+    material: raw.material || undefined,
+    duration: raw.duration || '',
+    text: formatRawSpellText(raw.description || raw.text || ''),
     concentration: isConcentration,
+    source: raw.source || '',
   };
 }
 
