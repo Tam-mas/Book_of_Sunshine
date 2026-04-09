@@ -1,6 +1,51 @@
 {
   "allSpells": [
     {
+      "name": "Infestation",
+      "classes": "Druid, Sorcerer, Warlock, Wizard",
+      "level": "cantrip",
+      "school": "Conjuration",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "30 feet",
+      "components": "Verbal, Somatic, Material",
+      "material": "a living flea",
+      "duration": "Instantaneous",
+      "description": "You cause a cloud of mites, fleas, and other parasites to appear momentarily on one creature you can see within range. The target must succeed on a Constitution saving throw, or it takes 1d6 poison damage and moves 5 feet in a random direction if it can move and its speed is at least 5 feet. Roll a d4 for the direction: 1, north; 2, south; 3, east; or 4, west. This movement doesn’t provoke opportunity attacks, and if the direction rolled is blocked, the target doesn't move. At Higher Levels: The spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).",
+      "source": "Xanathar's Guide to Everything",
+      "page": 158
+    },
+    {
+      "name": "Ice Knife",
+      "classes": "Druid, Sorcerer, Wizard",
+      "level": 1,
+      "school": "Conjuration",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "60 feet",
+      "components": "Somatic, Material",
+      "material": "a drop of water or piece of ice",
+      "duration": "Instantaneous",
+      "description": "You create a shard of ice and fling it at one creature within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 piercing damage. Hit or miss, the shard then explodes. The target and each creature within 5 feet of the point where the ice exploded must succeed on a Dexterity saving throw or take 2d6 cold damage. At Higher Levels: When you cast this spell using a spell slot of 2nd level or higher, the cold damage increases by 1d6 for each slot level above 1st.",
+      "source": "Xanathar's Guide to Everything",
+      "page": 157
+    },
+    {
+      "name": "Ray of Frost",
+      "classes": "Artificer, Sorcerer, Wizard",
+      "level": "cantrip",
+      "school": "Evocation",
+      "ritual": false,
+      "castingTime": "1 action",
+      "range": "60 feet",
+      "components": "Verbal, Somatic",
+      "material": "none",
+      "duration": "Instantaneous",
+      "description": "A frigid beam of blue-white light streaks toward a creature within range. Make a ranged spell attack against the target. On a hit, it takes 1d8 cold damage, and its speed is reduced by 10 feet until the start of your next turn. At Higher Levels: The spell’s damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).",
+      "source": "Player's Handbook",
+      "page": 271
+    },
+    {
       "name": "Acid Splash",
       "classes": "Sorcerer, Wizard",
       "level": "cantrip",
