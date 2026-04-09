@@ -50,7 +50,7 @@ export default function Home() {
       if (!searchMatch) return false;
 
       // Level Match
-      if (filters.level !== 'all' && spell.level.toString() !== filters.level) return false;
+      if (filters.level !== 'all' && String(spell.level) !== filters.level) return false;
 
       // Action Type Match
       if (filters.actionType !== 'all' && spell.action_type !== filters.actionType) return false;

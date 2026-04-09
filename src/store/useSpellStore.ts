@@ -4,7 +4,7 @@ import { persist } from 'zustand/middleware';
 export interface Spell {
   id: string;
   name: string;
-  level: number | string;
+  level: number;
   school?: string;
   casting_time?: string;
   castingTime?: string;
@@ -55,7 +55,7 @@ export const normalizeSpell = (raw: any): Spell => {
     ...raw,
     id: raw.id || raw.name.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
     name: raw.name,
-    level: raw.level === 'cantrip' ? 'cantrip' : (raw.level || 0),
+    level: raw.level === 'cantrip' || raw.level === '0' ? 0 : (parseInt(raw.level) || 0),
     casting_time: raw.casting_time || raw.castingTime || '',
     action_type: actionType,
     range: raw.range || '',
