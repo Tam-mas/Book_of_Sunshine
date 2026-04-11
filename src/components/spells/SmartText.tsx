@@ -43,8 +43,6 @@ export default function SmartText({ text }: { text: string }) {
             return paras.map((para, i) => <p key={i}>{renderBold(para)}</p>);
         }
 
-        const seen = new Set<string>();
-
         return paras.map((para, i) => {
             const parts = para.split(termsRegex);
             const nodes = [];
@@ -65,9 +63,8 @@ export default function SmartText({ text }: { text: string }) {
                 // So odd indices are matches
                 if (j % 2 === 1) {
                     const key = part.toLowerCase();
-                    if (!seen.has(key)) {
-                        seen.add(key);
-                        const def = glossaryMap.get(key)!;
+                    const def = glossaryMap.get(key);
+                    if (def) {
                         nodes.push(
                             <span
                                 key={j}
